@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocofood.kz</title>
+    <style>
+    
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Arial, Helvetica, sans-serif;
+        }
+        header {
+            background-color: #E43D35;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+       
+        .logo {
+            text-align: center;
+            flex-grow: 1;
+        }
+        .logo img {
+            height: 70px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 30px;
+            background: white;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu ul li {
+            padding: 10px 0;
+        }
+        .menu ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .menu ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            text-align: left;
+            flex-direction: row-reverse;
+        }
+        .about-text {
+            flex: 1;
+            padding-left: 20px;
+            font-size: 18px;
+        }
+        .about-text span {
+            color: red;
+            font-weight: bold;
+        }
+        .photo {
+            flex: 1;
+            max-width: 500px;
+        }
+        .photo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .order-section {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .order-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .order-card {
+            background: #fff;
+            border: 2px solid red;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%; 
+            max-width: 1000px; 
+            text-align: center;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-card h3 {
+            color: red;
+            margin-bottom: 15px; 
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px; 
+            text-align: center; 
+        }
+        
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        
+        #searchResult {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green; 
+        }
+        
+        #searchInput {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        
+        
+        button {
+            padding: 8px 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        button:hover {
+            background-color: darkred;
+        }
+
+        .customer-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+                
+        .customer-description {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        #payments {
+            text-align: center;
+            padding: 40px 20px;
+               
+        }
+        
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px; 
+            margin-top: 30px;
+        }
+        
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 180px; 
+        }
+        
+        .payment-method img {
+            width: 180px; 
+            height: 100px; 
+            object-fit: contain; 
+        }
+        
+        .payment-method p {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        #faq {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 15px;
+        width: 80%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .faq-question {
+        width: 100%;
+        padding: 10px;
+        background-color: #E43D35;
+        color: white;
+        border: none;
+        text-align: left;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .faq-answer {
+        display: none;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+    .faq-question:focus + .faq-answer,
+    .faq-question:active + .faq-answer {
+        display: block;
+    }
+
+    footer {
+    background-color: #E43D35;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.footer-links {
+    margin: 10px 0; 
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.social-media {
+    margin-top: 10px; 
+}
+
+.social-media img {
+    width: 60px;
+    height: 60px;
+}
+
+
+  
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector(".menu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }  
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="choco logo.png" alt="logo">
+        </div>
+
+        <button class="login-button" onclick="location.href='login.html'">Login</button>
+
+        <button class="menu-button" onclick="toggleMenu()">☰</button>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="#aboutus">About Us</a></li>
+                    <li><a href="#order-management">Order Management</a></li>
+                    <li><a href="#customer-issues">Customer issues</a></li>
+                    <li><a href="#payments">Payments</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <br>
+
+    <section id="aboutus" class="about-section">
+        <div class="photo">
+            <img src="./pizza.png" alt="Food Image 1">
+        </div>
+        <div class="about-text">
+            <h4>This <span>fast</span> and <span>convenient</span> service for <span>ordering food</span> from Almaty restaurants respects payments by credit cards and electronic money.</h4>
+        </div>
+    </section>
+    <hr>
+
+    <section id="order-management" class="order-section">
+        <h2>Order Management</h2>
+        <p>Manage your orders efficiently with real-time updates and flexible control.</p>
+        
+        <div class="order-container">
+            <!-- Order Status and Updates -->
+            <div class="order-card">
+                <h3>Order Status and Updates (892 requests)</h3>
+                <p>Track the status of your orders in real time.</p>
+    
+                <input type="text" id="searchStatusInput" placeholder="Enter Order ID">
+                <button onclick="searchOrder('searchStatusInput', 'ordersStatusTable', 'statusResult')">Search</button>
+                <p id="statusResult"></p>
+    
+                <table id="ordersStatusTable">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>2025-02-19</td>
+                        <td>Shipped</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>2025-02-19</td>
+                        <td>Processing</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>2025-02-18</td>
+                        <td>Delivered</td>
+                    </tr>
+                </table>
+            </div>
+    
+            <!-- Order Reassignment/Removal -->
+            <div class="order-card">
+                <h3>Order Reassignment/Removal</h3>
+                <p>Reassign or remove orders easily when needed.</p>
+    
+                <input type="text" id="searchReassignInput" placeholder="Enter Order ID">
+                <button onclick="searchOrder('searchReassignInput', 'ordersReassignTable', 'reassignResult')">Search</button>
+                <p id="reassignResult"></p>
+    
+                <table id="ordersReassignTable">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>2025-02-19</td>
+                        <td>Order Removed</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>2025-02-19</td>
+                        <td>Reassigned</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>2025-02-18</td>
+                        <td>Order Removed</td>
+                    </tr>
+                </table>
+            </div>
+    
+            <!-- Order Delay Management -->
+            <div class="order-card">
+                <h3>Order Delay Management</h3>
+                <p>Handle order delays effectively and notify customers.</p>
+    
+                <input type="text" id="searchDelayInput" placeholder="Enter Order ID">
+                <button onclick="searchOrder('searchDelayInput', 'ordersDelayTable', 'delayResult')">Search</button>
+                <p id="delayResult"></p>
+    
+                <table id="ordersDelayTable">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Delay Status</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>2025-02-19</td>
+                        <td>Delayed</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>2025-02-19</td>
+                        <td>No Delay</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>2025-02-18</td>
+                        <td>Delayed</td>
+                    </tr>
+                </table>
+            </div>
+    
+            <!-- Order Cancellation -->
+            <div class="order-card">
+                <h3>Order Cancellation</h3>
+                <p>Cancel orders quickly and efficiently.</p>
+    
+                <input type="text" id="searchCancelInput" placeholder="Enter Order ID">
+                <button onclick="searchOrder('searchCancelInput', 'ordersCancelTable', 'cancelResult')">Search</button>
+                <p id="cancelResult"></p>
+    
+                <table id="ordersCancelTable">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Cancellation Status</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>2025-02-19</td>
+                        <td>Cancelled</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>2025-02-19</td>
+                        <td>Not Cancelled</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>2025-02-18</td>
+                        <td>Cancelled</td>
+                    </tr>
+                </table>
+            </div>
+    
+        </div>
+    </section>
+    <hr>
+    
+    <script>
+        function searchOrder(inputId, tableId, resultId) {
+            var input = document.getElementById(inputId).value.trim();
+            var table = document.getElementById(tableId);
+            var rows = table.getElementsByTagName("tr");
+            var result = document.getElementById(resultId);
+    
+            result.textContent = ""; 
+    
+            for (var i = 1; i < rows.length; i++) { 
+                var orderId = rows[i].getElementsByTagName("td")[0].textContent;
+                var status = rows[i].getElementsByTagName("td")[2].textContent;
+    
+                if (orderId === input) {
+                    result.textContent = "Order " + orderId + " is " + status;
+                    result.style.color = "green";
+                    return;
+                }
+            }
+    
+            result.textContent = "Order ID not found";
+            result.style.color = "red";
+        }
+    </script>
+
+<section id="customer-issues">
+    <h2>Custumer Issues</h2>
+    <p class="customer-description">Check your order status, estimated wait time, or queue position.</p>
+    <div class="order-container">
+        <div class="order-card">
+            <h3>Wait Time Issues</h3>
+            <input type="text" id="orderIdWait" placeholder="Enter Order ID">
+            <select id="waitTimeOption">
+                <option value="1">Estimate Wait Time</option>
+                <option value="2">Check Queue Position</option>
+                <option value="3">Check Order Status</option>
+            </select>
+            <button onclick="handleWaitTime()">Submit</button>
+            <p id="waitResult"></p>
+        </div>
+</section>
+<br>
+<hr>
+<br>
+<script>
+    const orders = { "1001": "Processing", "1002": "Shipped", "1003": "Delivered" };
+    const validAddresses = ["Main Street, 123, New York", "Baker Street, 221B, London", "Seoul Tower, 99, Seoul"];
+    
+    function handleWaitTime() {
+        const orderId = document.getElementById("orderIdWait").value.trim();
+        const option = document.getElementById("waitTimeOption").value;
+        const result = document.getElementById("waitResult");
+        
+        if (!orders[orderId]) {
+            result.textContent = "Order not found.";
+            result.style.color = "red";
+        } else {
+            if (option === "1") result.textContent = "Estimated wait time: 10-15 minutes.";
+            if (option === "2") result.textContent = "Your order is 2nd in the queue.";
+            if (option === "3") result.textContent = "Order Status: " + orders[orderId];
+            result.style.color = "green";
+        }
+        document.getElementById("orderIdWait").value = "";
+    }
+</script>
+
+<section id="payments">
+    <h2>Payments</h2>
+    <p>Preferred payment method:</p>
+    <div class="payment-options">
+        <div class="payment-method">
+            <img src="./debitcard.png" alt="Credit/Debit Card">
+            <p>Credit/Debit Card</p>
+        </div>
+        <div class="payment-method">
+            <img src="./apple.png" alt="Apple Pay">
+            <p>Apple Pay</p>
+        </div>
+        <div class="payment-method">
+            <img src="./gpay.png" alt="Google Pay">
+            <p>Google Pay</p>
+        </div>
+        <div class="payment-method">
+            <img src="./cash.png" alt="Cash">
+            <p>Cash</p>
+        </div>
+    </div>
+</section>
+<hr>
+
+<section id="support">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <button class="faq-question">How do I manage my schedule and slots?</button>
+        <div class="faq-answer">You can manage your schedule and availability through the schedule settings in your profile.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">What languages are supported?</button>
+        <div class="faq-answer">We support multiple languages. You can change the language in the settings menu.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">How do I check my activity status?</button>
+        <div class="faq-answer">Your activity status can be managed from the dashboard.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">How are orders assigned?</button>
+        <div class="faq-answer">Orders are automatically assigned based on availability and location.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">What should I do if there is an issue with weight and size?</button>
+        <div class="faq-answer">If you encounter issues with order weight and size, report it through the support section.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">How can I resolve technical issues?</button>
+        <div class="faq-answer">For technical issues, please restart the app and check for updates. If the issue persists, contact support.</div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Found an error? Contact us</button>
+        <div class="faq-answer">If you found an error, please reach out to us at <a href="mailto:support@chocofood.com">support@chocofood.com</a>.</div>
+    </div>
+</section>
+<script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            let answer = button.nextElementSibling;
+            answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
+        });
+    });
+</script>
+
+<footer>
+    <section id="contact">
+        <div class="footer-links">
+            <a href="mailto:support@chocofood.com">Contact Us</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+        <div class="social-media">
+
+            <a href="https://www.instagram.com/chocofood.kz/?hl=ru" target="_blank">
+                <img src="./inst.png"Instagram">
+            </a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>    
